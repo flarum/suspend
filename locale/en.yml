@@ -1,0 +1,38 @@
+flarum-suspend:
+    
+  ##
+  # UNIQUE KEYS - The following keys are used in only one location each.
+  ##
+  
+  # Strings in this namespace are used by the forum interface.
+  forum:
+    
+    # Theis string is used by the moderation control button.
+    moderation_controls:
+      suspend_button: => flarum-suspend.ref.suspend    # Used in the code that creates the button.
+      suspend_title: => flarum-suspend.ref.suspend     # Used in the code that creates the Title.
+      save_button: => flarum-suspend.ref.suspend       # Used in the code that creates the button.
+  
+    # This istring is used to display the badge.
+    badge:
+      suspended: Suspended
+    
+    status:
+      suspend_status: Suspension Status       #suspension status
+      not_suspended: Not Suspended
+      suspended_indefinitely: Suspended indefinitely
+      suspended_for: Suspended for a limited time...
+      days: days
+      
+  # Strings in this namespace are used by the admin interface.    
+  admin:
+    suspend_label: Suspend users
+      
+      
+  ##
+  # REUSED STRINGS - These keys should not be used directly in code!
+  ##
+
+  # Strings in this namespace are referenced by two or more unique keys.
+  ref:
+    suspend: Suspend

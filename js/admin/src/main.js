@@ -6,7 +6,7 @@ app.initializers.add('suspend', () => {
   extend(PermissionGrid.prototype, 'moderateItems', items => {
     items.add('suspendUsers', {
       icon: 'ban',
-      label: app.translator.trans('flarum-suspend.admin.permissions.suspend_users_label'),
+      label: app.translator.trans('flarum-suspend.admin.suspend_label'),
       permission: 'user.suspend'
     });
   });
