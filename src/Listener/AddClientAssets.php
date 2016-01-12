@@ -10,7 +10,9 @@
 
 namespace Flarum\Suspend\Listener;
 
+use DirectoryIterator;
 use Flarum\Event\ConfigureClientView;
+use Flarum\Event\ConfigureLocales;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddClientAssets
@@ -21,6 +23,7 @@ class AddClientAssets
     public function subscribe(Dispatcher $events)
     {
         $events->listen(ConfigureClientView::class, [$this, 'addAssets']);
+        $events->listen(ConfigureLocales::class, [$this, 'addLocales']);
     }
 
     /**
@@ -42,6 +45,15 @@ class AddClientAssets
                 __DIR__.'/../../less/admin/extension.less'
             ]);
             $event->addBootstrapper('flarum/suspend/main');
+        }
+    }
+    
+    public function addLocales(ConfigureLocales $event)
+    {
+        foreach (new DirectoryIterator(__DIR__ .'/../../locale') as $file) {
+            if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
+                $event->locales->addTranslations($file->getBasename('.' . $file->getExtension()), $file->getPathname());
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ export default class SuspendUserModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('flarum-suspend.forum.suspend_user.title', {user: this.props.user});
+    return app.translator.trans('flarum-suspend.forum.moderation_controls.suspend_title') + ' ' + this.props.user.username();
   }
 
   content() {
@@ -32,16 +32,16 @@ export default class SuspendUserModal extends Modal {
       <div className="Modal-body">
         <div className="Form">
           <div className="Form-group">
-            <label>{app.translator.trans('flarum-suspend.forum.suspend_user.status_heading')}</label>
+            <label>{app.translator.trans('flarum-suspend.forum.status.suspend_status')}</label>
             <div>
               <label className="checkbox">
                 <input type="radio" name="status" checked={!this.status()} onclick={m.withAttr('value', this.status)}/>
-                {app.translator.trans('flarum-suspend.forum.suspend_user.not_suspended_label')}
+                {app.translator.trans('flarum-suspend.forum.status.not_suspended')}
               </label>
 
               <label className="checkbox">
                 <input type="radio" name="status" checked={this.status() === 'indefinitely'} value='indefinitely' onclick={m.withAttr('value', this.status)}/>
-                {app.translator.trans('flarum-suspend.forum.suspend_user.indefinitely_label')}
+                {app.translator.trans('flarum-suspend.forum.status.suspended_indefinitely')}
               </label>
 
               <label className="checkbox SuspendUserModal-days">
@@ -51,7 +51,7 @@ export default class SuspendUserModal extends Modal {
                   this.$('.SuspendUserModal-days-input input').select();
                   m.redraw.strategy('none');
                 }}/>
-                {app.translator.trans('flarum-suspend.forum.suspend_user.limited_time_label')}
+                {app.translator.trans('flarum-suspend.forum.status.suspended_for')}
                 {this.status() === 'limited' ? (
                   <div className="SuspendUserModal-days-input">
                     <input type="number"
@@ -59,7 +59,7 @@ export default class SuspendUserModal extends Modal {
                       value={this.daysRemaining()}
                       oninput={m.withAttr('value', this.daysRemaining)}
                       className="FormControl"/>
-                    {app.translator.trans('flarum-suspend.forum.suspend_user.limited_time_days_text')}
+                    {app.translator.trans('flarum-suspend.forum.status.days')}
                   </div>
                 ) : ''}
               </label>
@@ -68,7 +68,7 @@ export default class SuspendUserModal extends Modal {
 
           <div className="Form-group">
             <Button className="Button Button--primary" loading={this.loading} type="submit">
-              {app.translator.trans('flarum-suspend.forum.suspend_user.submit_button')}
+            {app.translator.trans('flarum-suspend.forum.moderation_controls.save_button')}
             </Button>
           </div>
         </div>
