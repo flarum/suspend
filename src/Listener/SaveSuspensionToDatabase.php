@@ -12,8 +12,8 @@
 namespace Flarum\Suspend\Listener;
 
 use DateTime;
-use Flarum\Core\Access\AssertPermissionTrait;
-use Flarum\Event\UserWillBeSaved;
+use Flarum\User\AssertPermissionTrait;
+use Flarum\User\Event\Saving;
 use Flarum\Suspend\SuspendValidator;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -41,13 +41,13 @@ class SaveSuspensionToDatabase
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(UserWillBeSaved::class, [$this, 'whenUserWillBeSaved']);
+        $events->listen(Saving::class, [$this, 'whenSaving']);
     }
 
     /**
-     * @param UserWillBeSaved $event
+     * @param Saving $event
      */
-    public function whenUserWillBeSaved(UserWillBeSaved $event)
+    public function whenSaving(Saving $event)
     {
         $attributes = array_get($event->data, 'attributes', []);
 

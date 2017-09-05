@@ -12,7 +12,7 @@
 namespace Flarum\Suspend\Listener;
 
 use Carbon\Carbon;
-use Flarum\Core\Group;
+use Flarum\Group\Group;
 use Flarum\Event\PrepareUserGroups;
 use Illuminate\Contracts\Events\Dispatcher;
 
