@@ -11,10 +11,10 @@
 
 namespace Flarum\Suspend\Listener;
 
-use Flarum\Api\Serializer\UserSerializer;
-use Flarum\User\User;
-use Flarum\Event\ConfigureModelDates;
 use Flarum\Api\Event\Serializing;
+use Flarum\Api\Serializer\UserSerializer;
+use Flarum\Event\ConfigureModelDates;
+use Flarum\User\User;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddUserSuspendAttributes

@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Flarum\Group\Group;
 use Flarum\Database\Migration;
+use Flarum\Group\Group;
 
 return Migration::addPermissions([
     'user.suspend' => Group::MODERATOR_ID

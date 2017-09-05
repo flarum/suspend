@@ -12,9 +12,9 @@
 namespace Flarum\Suspend\Listener;
 
 use DateTime;
+use Flarum\Suspend\SuspendValidator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\Event\Saving;
-use Flarum\Suspend\SuspendValidator;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class SaveSuspensionToDatabase
