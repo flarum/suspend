@@ -41,13 +41,13 @@ class SaveSuspensionToDatabase
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(Saving::class, [$this, 'whenSaving']);
+        $events->listen(Saving::class, [$this, 'whenSavingUser']);
     }
 
     /**
      * @param Saving $event
      */
-    public function whenSaving(Saving $event)
+    public function whenSavingUser(Saving $event)
     {
         $attributes = array_get($event->data, 'attributes', []);
 
