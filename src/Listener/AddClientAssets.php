@@ -24,9 +24,6 @@ class AddClientAssets
         $events->listen(Rendering::class, [$this, 'addAssets']);
     }
 
-    /**
-     * @param ConfigureClientView $event
-     */
     public function addAssets(Rendering $event)
     {
         if ($event->isForum()) {
