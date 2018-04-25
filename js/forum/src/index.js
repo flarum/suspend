@@ -6,7 +6,7 @@ import Badge from 'flarum/components/Badge';
 import Model from 'flarum/Model';
 import User from 'flarum/models/User';
 
-import SuspendUserModal from 'flarum/suspend/components/SuspendUserModal';
+import SuspendUserModal from './components/SuspendUserModal';
 
 app.initializers.add('flarum-suspend', () => {
   User.prototype.canSuspend = Model.attribute('canSuspend');
