@@ -12,8 +12,9 @@
 namespace Flarum\Suspend\Listener;
 
 use Carbon\Carbon;
-use Flarum\Event\PrepareUserGroups;
-use Flarum\Group\Group;
+use Flarum\Event\GetPermission;
+use Flarum\Event\ScopeModelVisibility;
+use Flarum\User\Guest;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class RevokeAccessFromSuspendedUsers
@@ -23,18 +24,16 @@ class RevokeAccessFromSuspendedUsers
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PrepareUserGroups::class, [$this, 'prepareUserGroups']);
+        $events->listen(GetPermission::class, [$this, 'revokeAccess']);
+        $events->listen(ScopeModelVisibility::class, [$this, 'revokeAccess']);
     }
 
-    /**
-     * @param PrepareUserGroups $event
-     */
-    public function prepareUserGroups(PrepareUserGroups $event)
+    public function revokeAccess($event)
     {
-        $suspendUntil = $event->user->suspend_until;
+        $suspendUntil = $event->actor->suspend_until;
 
         if ($suspendUntil && $suspendUntil->gt(Carbon::now())) {
-            $event->groupIds = [Group::GUEST_ID];
+            $event->actor = new Guest;
         }
     }
 }
