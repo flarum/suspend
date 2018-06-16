@@ -7,8 +7,13 @@ import Model from 'flarum/Model';
 import User from 'flarum/models/User';
 
 import SuspendUserModal from './components/SuspendUserModal';
+import UserSuspendedNotification from './components/UserSuspendedNotification';
+import UserUnsuspendedNotification from './components/UserUnsuspendedNotification';
 
 app.initializers.add('flarum-suspend', () => {
+  app.notificationComponents.userSuspended = UserSuspendedNotification;
+  app.notificationComponents.userUnsuspended = UserUnsuspendedNotification;
+
   User.prototype.canSuspend = Model.attribute('canSuspend');
   User.prototype.suspendUntil = Model.attribute('suspendUntil', Model.transformDate);
 
@@ -16,7 +21,7 @@ app.initializers.add('flarum-suspend', () => {
     if (user.canSuspend()) {
       items.add('suspend', Button.component({
         children: app.translator.trans('flarum-suspend.forum.user_controls.suspend_button'),
-        icon: 'fa fa-ban',
+        icon: 'fas fa-ban',
         onclick: () => app.modal.show(new SuspendUserModal({user}))
       }));
     }
@@ -27,7 +32,7 @@ app.initializers.add('flarum-suspend', () => {
 
     if (new Date() < until) {
       items.add('suspended', Badge.component({
-        icon: 'fa fa-ban',
+        icon: 'fas fa-ban',
         type: 'suspended',
         label: app.translator.trans('flarum-suspend.forum.user_badge.suspended_tooltip')
       }));
