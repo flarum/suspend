@@ -71,7 +71,7 @@ class SaveSuspensionToDatabase
                 ? new DateTime($attributes['suspendUntil'])
                 : null;
 
-            if ($user->isDirty('suspend_until')) {
+            if ($user->isDirty('suspended_until')) {
                 $this->events->dispatch(
                     $user->suspended_until === null ?
                         new Unsuspended($user, $actor) :
