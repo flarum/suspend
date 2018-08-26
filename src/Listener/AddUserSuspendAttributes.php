@@ -47,7 +47,7 @@ class AddUserSuspendAttributes
             $canSuspend = $event->actor->can('suspend', $event->model);
 
             if ($canSuspend) {
-                $event->attributes['suspendUntil'] = $event->formatDate($event->model->suspended_until);
+                $event->attributes['suspendedUntil'] = $event->formatDate($event->model->suspended_until);
             }
 
             $event->attributes['canSuspend'] = $canSuspend;

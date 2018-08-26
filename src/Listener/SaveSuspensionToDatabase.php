@@ -59,7 +59,7 @@ class SaveSuspensionToDatabase
     {
         $attributes = array_get($event->data, 'attributes', []);
 
-        if (array_key_exists('suspendUntil', $attributes)) {
+        if (array_key_exists('suspendedUntil', $attributes)) {
             $this->validator->assertValid($attributes);
 
             $user = $event->user;
@@ -67,8 +67,8 @@ class SaveSuspensionToDatabase
 
             $this->assertCan($actor, 'suspend', $user);
 
-            $user->suspended_until = $attributes['suspendUntil']
-                ? new DateTime($attributes['suspendUntil'])
+            $user->suspended_until = $attributes['suspendedUntil']
+                ? new DateTime($attributes['suspendedUntil'])
                 : null;
 
             if ($user->isDirty('suspended_until')) {
