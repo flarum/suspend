@@ -13,10 +13,9 @@ export default class UserUnsuspendedNotification extends Notification {
 
   content() {
     const notification = this.props.notification;
-    const actor = notification.fromUser();
 
-    return app.translator.transChoice('flarum-suspend.forum.notifications.user_unsuspended_text', {
-      actor,
+    return app.translator.trans('flarum-suspend.forum.notifications.user_unsuspended_text', {
+      user: notification.fromUser(),
     });
   }
 }

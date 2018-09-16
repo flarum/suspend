@@ -13,12 +13,11 @@ export default class UserSuspendedNotification extends Notification {
 
   content() {
     const notification = this.props.notification;
-    const actor = notification.fromUser();
     const suspendedUntil = notification.content();
     const timeReadable = moment(suspendedUntil.date).from(notification.createdAt(), true);
 
-    return app.translator.transChoice('flarum-suspend.forum.notifications.user_suspended_text', {
-      actor,
+    return app.translator.trans('flarum-suspend.forum.notifications.user_suspended_text', {
+      user: notification.fromUser(),
       timeReadable,
     });
   }
