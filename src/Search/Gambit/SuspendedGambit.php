@@ -39,6 +39,18 @@ class SuspendedGambit extends AbstractRegexGambit
     /**
      * {@inheritdoc}
      */
+    public function apply(AbstractSearch $search, $bit)
+    {
+        if (!$search->getActor()->can('suspend')) {
+            return false;
+        }
+
+        return parent::apply($search, $bit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function conditions(AbstractSearch $search, array $matches, $negate)
     {
         if (!$search instanceof UserSearch) {
