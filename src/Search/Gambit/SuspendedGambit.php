@@ -45,10 +45,12 @@ class SuspendedGambit extends AbstractRegexGambit
             throw new LogicException('This gambit can only be applied on a DiscussionSearch');
         }
 
-        if ($negate) {
-            $search->getQuery()->where('suspended_until', null)->orWhere('suspended_until', '<', Carbon::now());
-        } else {
-            $search->getQuery()->where('suspended_until', '>', Carbon::now());
-        }
+        $search->getQuery()->where(function ($query) use ($negate) {
+            if ($negate) {
+                $query->where('suspended_until', null)->orWhere('suspended_until', '<', Carbon::now());
+            } else {
+                $query->where('suspended_until', '>', Carbon::now());
+            }
+        });
     }
 }
