@@ -10,10 +10,10 @@
 namespace Flarum\Suspend\Search\Gambit;
 
 use Carbon\Carbon;
-use Flarum\User\UserRepository;
-use Flarum\User\Search\UserSearch;
 use Flarum\Search\AbstractRegexGambit;
 use Flarum\Search\AbstractSearch;
+use Flarum\User\Search\UserSearch;
+use Flarum\User\UserRepository;
 use LogicException;
 
 class SuspendedGambit extends AbstractRegexGambit
@@ -41,7 +41,7 @@ class SuspendedGambit extends AbstractRegexGambit
      */
     public function apply(AbstractSearch $search, $bit)
     {
-        if (!$search->getActor()->can('suspend')) {
+        if (! $search->getActor()->can('suspend')) {
             return false;
         }
 
@@ -53,7 +53,7 @@ class SuspendedGambit extends AbstractRegexGambit
      */
     protected function conditions(AbstractSearch $search, array $matches, $negate)
     {
-        if (!$search instanceof UserSearch) {
+        if (! $search instanceof UserSearch) {
             throw new LogicException('This gambit can only be applied on a DiscussionSearch');
         }
 
