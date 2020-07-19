@@ -50,7 +50,7 @@ class SaveSuspensionToDatabase
             $user = $event->user;
             $actor = $event->actor;
 
-            $actor->can('suspend', $user);
+            $actor->assertCan('suspend', $user);
 
             $user->suspended_until = $attributes['suspendedUntil']
                 ? new DateTime($attributes['suspendedUntil'])
