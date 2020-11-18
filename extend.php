@@ -39,14 +39,17 @@ return [
         ->type(UserSuspendedBlueprint::class, BasicUserSerializer::class, ['alert', 'email'])
         ->type(UserUnsuspendedBlueprint::class, BasicUserSerializer::class, ['alert', 'email']),
 
+    (new Extend\Event())
+        ->listen(Saving::class, Listener\SaveSuspensionToDatabase::class)
+        ->listen(Saving::class, Listener\PreventAttributesMutations::class)
+        ->listen(Suspended::class, Listener\SendNotificationWhenUserIsSuspended::class)
+        ->listen(Unsuspended::class, Listener\SendNotificationWhenUserIsUnsuspended::class),
+
+    (new Extend\User)
+        ->permissionGroups(Listener\RevokeAccessFromSuspendedUsers::class),
+
     function (Dispatcher $events) {
         $events->subscribe(Listener\AddUserSuspendAttributes::class);
-        $events->subscribe(Listener\RevokeAccessFromSuspendedUsers::class);
-
-        $events->listen(Saving::class, Listener\SaveSuspensionToDatabase::class);
-
-        $events->listen(Suspended::class, Listener\SendNotificationWhenUserIsSuspended::class);
-        $events->listen(Unsuspended::class, Listener\SendNotificationWhenUserIsUnsuspended::class);
 
         $events->subscribe(Access\UserPolicy::class);
 
