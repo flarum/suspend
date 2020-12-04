@@ -14,8 +14,9 @@ use Flarum\User\User;
 
 class AddUserSuspendAttributes
 {
-    public function __invoke(array $attributes, User $user, UserSerializer $serializer)
+    public function __invoke(UserSerializer $serializer, User $user)
     {
+        $attributes = [];
         $canSuspend = $serializer->getActor()->can('suspend', $user);
 
         if ($canSuspend) {
