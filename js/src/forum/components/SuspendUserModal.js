@@ -9,6 +9,8 @@ export default class SuspendUserModal extends Modal {
     super.oninit(vnode);
 
     let until = this.attrs.user.suspendedUntil();
+    let reason = this.attrs.user.suspendReason();
+    let message = this.attrs.user.suspendMessage();
     let status = null;
 
     if (new Date() > until) until = null;
@@ -19,6 +21,8 @@ export default class SuspendUserModal extends Modal {
     }
 
     this.status = Stream(status);
+    this.reason = Stream(reason);
+    this.message = Stream(message);
     this.daysRemaining = Stream(status === 'limited' && -dayjs().diff(until, 'days') + 1);
   }
 
@@ -70,6 +74,20 @@ export default class SuspendUserModal extends Modal {
           </div>
 
           <div className="Form-group">
+            <label>
+              {app.translator.trans('flarum-suspend.forum.suspend_user.reason')}
+              <textarea className="FormControl" bidi={this.reason} placeholder="optional" rows="2"/>
+            </label>
+          </div>
+
+          <div className="Form-group">
+            <label>
+              {app.translator.trans('flarum-suspend.forum.suspend_user.display_message')}
+              <textarea className="FormControl" bidi={this.message} placeholder="optional" rows="2"/>
+            </label>
+          </div>
+
+          <div className="Form-group">
             <Button className="Button Button--primary" loading={this.loading} type="submit">
               {app.translator.trans('flarum-suspend.forum.suspend_user.submit_button')}
             </Button>
@@ -85,6 +103,7 @@ export default class SuspendUserModal extends Modal {
     this.loading = true;
 
     let suspendedUntil = null;
+
     switch (this.status()) {
       case 'indefinitely':
         suspendedUntil = new Date('2038-01-01');
@@ -98,7 +117,7 @@ export default class SuspendUserModal extends Modal {
         // no default
     }
 
-    this.attrs.user.save({suspendedUntil}).then(
+    this.attrs.user.save({suspendedUntil: suspendedUntil, suspendReason: this.reason(), suspendMessage: this.message()}).then(
       () => this.hide(),
       this.loaded.bind(this)
     );
