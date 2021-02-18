@@ -9,6 +9,7 @@ import User from 'flarum/models/User';
 import SuspendUserModal from './components/SuspendUserModal';
 import UserSuspendedNotification from './components/UserSuspendedNotification';
 import UserUnsuspendedNotification from './components/UserUnsuspendedNotification';
+import checkForSuspension from './checkForSuspension';
 
 app.initializers.add('flarum-suspend', () => {
   app.notificationComponents.userSuspended = UserSuspendedNotification;
@@ -39,4 +40,6 @@ app.initializers.add('flarum-suspend', () => {
       }));
     }
   });
+
+  checkForSuspension();
 });
