@@ -43,3 +43,25 @@ flarum-suspend:
     # These translations are found on the user profile page (admin function).
     user_controls:
       suspend_button: Suspend
+
+  # Translations in this namespace are used by suspension email notifications
+  email:
+    suspended:
+      subject: You have been suspended
+      body: |
+        Hey {recipient_display_name},
+
+        You've been suspended for the following reason:
+        
+        ---
+        {suspension_message}
+        ---
+
+    unsuspended:
+      subject: You have been unsuspended
+      body: |
+        Hey {recipient_display_name},
+
+        You've been unsuspended. You can head back to the forum by clicking the following link:
+
+        {forum_url}
