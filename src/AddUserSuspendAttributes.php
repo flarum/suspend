@@ -22,6 +22,7 @@ class AddUserSuspendAttributes
 
         if ($canSuspend) {
             $attributes['suspendedUntil'] = $serializer->formatDate($user->suspended_until);
+            $attributes['suspendMessage'] = $user->suspend_message;
             $attributes['suspendReason'] = $user->suspend_reason;
         }
 
@@ -29,6 +30,7 @@ class AddUserSuspendAttributes
             if (!empty($user->suspend_message)) {
                 $attributes['suspendMessage'] = $user->suspend_message;
             }
+            $attributes['suspendedUntil'] = $serializer->formatDate($user->suspended_until);
         }
 
         $attributes['canSuspend'] = $canSuspend;

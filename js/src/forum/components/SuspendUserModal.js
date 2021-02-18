@@ -27,7 +27,7 @@ export default class SuspendUserModal extends Modal {
   }
 
   className() {
-    return 'SuspendUserModal Modal--small';
+    return 'SuspendUserModal Modal--medium';
   }
 
   title() {
