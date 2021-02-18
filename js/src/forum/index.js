@@ -43,3 +43,9 @@ app.initializers.add('flarum-suspend', () => {
 
   checkForSuspension();
 });
+
+// Expose compat API
+import suspendCompat from './compat';
+import { compat } from '@flarum/core/forum';
+
+Object.assign(compat, suspendCompat);
