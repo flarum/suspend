@@ -54,8 +54,6 @@ class SaveSuspensionToDatabase
             $actor->assertCan('suspend', $user);
 
             $user->suspended_until = null;
-            $user->suspend_reason = null;
-            $user->suspend_message = null;
 
             if ($attributes['suspendedUntil']) {
                 $user->suspended_until = new DateTime($attributes['suspendedUntil']);

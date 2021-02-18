@@ -41,6 +41,9 @@ return [
 
     new Extend\Locales(__DIR__.'/locale'),
 
+    (new Extend\View())
+        ->namespace('flarum-suspend', __DIR__.'/views'),
+
     (new Extend\Notification())
         ->type(UserSuspendedBlueprint::class, BasicUserSerializer::class, ['alert', 'email'])
         ->type(UserUnsuspendedBlueprint::class, BasicUserSerializer::class, ['alert', 'email']),
