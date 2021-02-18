@@ -18,8 +18,8 @@ export default class ResultsModal extends Modal {
     }
 
     content() {
-        const timespan = this.until.getFullYear() === 9999 
-            ? app.translator.trans('flarum-suspend.forum.infomodal.indefinate') 
+        const timespan = this.until.getFullYear() === 2038 
+            ? app.translator.trans('flarum-suspend.forum.infomodal.indefinite') 
             : app.translator.trans('flarum-suspend.forum.infomodal.limited', {date: fullTime(this.until)});
         return (
             <div className="Modal-body">

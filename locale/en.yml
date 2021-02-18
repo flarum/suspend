@@ -16,7 +16,7 @@ flarum-suspend:
     # These translations are used in the suspension info modal
     infomodal:
       dismiss_button: Dismiss
-      indefinate: This is an indefinate suspension
+      indefinite: This is an indefinite suspension
       limited: "This suspension will be in force until {date}"
       title: This account is suspended
     # These translations are used in the suspension notifications
