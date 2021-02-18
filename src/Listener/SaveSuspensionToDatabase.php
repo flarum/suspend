@@ -66,7 +66,7 @@ class SaveSuspensionToDatabase
                 $user->suspend_message = null;
             }
 
-            if ($user->isDirty(['suspended_until','suspend_reason','suspend_message'])) {
+            if ($user->isDirty(['suspended_until', 'suspend_reason', 'suspend_message'])) {
                 $this->events->dispatch(
                     $user->suspended_until === null ?
                         new Unsuspended($user, $actor) :
