@@ -61,6 +61,9 @@ class SaveSuspensionToDatabase
                 $user->suspended_until = new DateTime($attributes['suspendedUntil']);
                 $user->suspend_reason = empty($attributes['suspendReason']) ? null : $attributes['suspendReason'];
                 $user->suspend_message = empty($attributes['suspendMessage']) ? null : $attributes['suspendMessage'];
+            } else {
+                $user->suspend_reason = null;
+                $user->suspend_message = null;
             }
 
             if ($user->isDirty(['suspended_until','suspend_reason','suspend_message'])) {
