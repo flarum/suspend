@@ -12,6 +12,7 @@ namespace Flarum\Suspend\Notification;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Notification\MailableInterface;
 use Flarum\User\User;
+use Illuminate\Support\Carbon;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class UserUnsuspendedBlueprint implements BlueprintInterface, MailableInterface
@@ -57,6 +58,7 @@ class UserUnsuspendedBlueprint implements BlueprintInterface, MailableInterface
      */
     public function getData()
     {
+        return Carbon::now();
     }
 
     /**
