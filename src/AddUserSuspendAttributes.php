@@ -18,8 +18,18 @@ class AddUserSuspendAttributes
     {
         $attributes = [];
         $canSuspend = $serializer->getActor()->can('suspend', $user);
+        $isCurrentUser = $serializer->getActor()->id === $user->id;
 
         if ($canSuspend) {
+            $attributes['suspendedUntil'] = $serializer->formatDate($user->suspended_until);
+            $attributes['suspendMessage'] = $user->suspend_message;
+            $attributes['suspendReason'] = $user->suspend_reason;
+        }
+
+        if ($isCurrentUser || $canSuspend) {
+            if (! empty($user->suspend_message)) {
+                $attributes['suspendMessage'] = $user->suspend_message;
+            }
             $attributes['suspendedUntil'] = $serializer->formatDate($user->suspended_until);
         }
 
