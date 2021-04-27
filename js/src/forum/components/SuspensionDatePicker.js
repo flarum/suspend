@@ -13,7 +13,7 @@ export default class SuspensionDatePicker extends Component {
     flatpickr('.flatpickr-input', {
       enableTime: true,
       minDate: 'today',
-      dateFormat: 'l, d F, Y H:i K',
+      dateFormat: 'l, d F, Y h:i K',
       defaultDate: this.untilDateUnformatted,
       onChange: (selectedDates, dateStr, instance) => {this.updateDate(dateStr)}
     });
