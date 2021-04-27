@@ -4,7 +4,7 @@ import flatpickr from 'flatpickr';
 export default class SuspensionDatePicker extends Component {
   oninit(vnode) {
     super.oninit(vnode);
-    this.untilDateUnformatted = new Date(this.attrs.untilDate());
+    this.untilDateUnformatted = this.attrs.untilDate() === null ? new Date() : new Date(this.attrs.untilDate());
     this.untilDate = this.formatDate(this.untilDateUnformatted);
     this.updateDate = this.attrs.updateDate;
   }
