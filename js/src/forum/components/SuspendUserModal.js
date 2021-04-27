@@ -22,28 +22,15 @@ export default class SuspendUserModal extends Modal {
       if (until.getFullYear() === 9999) status = 'indefinitely';
       else status = 'limited';
     }
-    console.log(until);
 
     this.status = Stream(status);
     this.reason = Stream(reason);
     this.message = Stream(message);
     this.until = Stream(until);
+  }
 
-    // let remaining = -dayjs().diff(until, 'minute');
-    // console.log(remaining);
-    // let days = Math.floor((remaining / 60) / 24);
-    // let hours = Math.floor(
-    //   days > 0 ?
-    //     Math.floor(24 - ((((remaining / 60).toFixed(0) - (remaining / 60)) * 60).toFixed(0) / 60)) :
-    //     Math.floor((remaining / 60))
-    // );
-    // let minutes = Math.floor(60 - (((remaining / 60).toFixed(0) - (remaining / 60)) * 60).toFixed(0));
-    // console.log(minutes);
-    // console.log(hours);
-    // console.log(days);
-    // this.daysRemaining = Stream(status === 'limited' && days);
-    // this.hoursRemaining = Stream(status === 'limited' && hours);
-    // this.minutesRemaining = Stream(status === 'limited' && minutes);
+  updateDate(date) {
+    this.until(date)
   }
 
   className() {
@@ -96,7 +83,21 @@ export default class SuspendUserModal extends Modal {
       90
     );
 
-    items.add('date', <SuspensionDatePicker until={this.until}/>)
+    items.add('time-suspension',
+      <label className="checkbox SuspendUserModal-days">
+        <input type="radio" name="status" checked={this.status() === 'limited'} value='limited' onclick={e => {
+          this.status(e.target.value);
+          m.redraw.sync();
+          this.$('.SuspendUserModal-days-input input').select();
+          e.redraw = false;
+        }} />
+        {app.translator.trans('flarum-suspend.forum.suspend_user.limited_time_label')}
+        {this.status() === 'limited' ? (
+          <SuspensionDatePicker untilDate={this.until} updateDate={this.updateDate.bind(this)}/>
+        ) : ''}
+      </label>,
+      80
+    );
 
     items.add(
       'reason',
@@ -132,7 +133,7 @@ export default class SuspendUserModal extends Modal {
         break;
 
       case 'limited':
-        suspendedUntil = dayjs().add(this.daysRemaining(), 'days').add(this.hoursRemaining(), 'hours').add(this.minutesRemaining(), 'minutes').toDate();
+        suspendedUntil = new Date(this.until());
         break;
 
       default:
