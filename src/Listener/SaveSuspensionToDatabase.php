@@ -10,6 +10,8 @@
 namespace Flarum\Suspend\Listener;
 
 use DateTime;
+use Flarum\Formatter\Formatter;
+use Flarum\Post\Post;
 use Flarum\Suspend\Event\Suspended;
 use Flarum\Suspend\Event\Unsuspended;
 use Flarum\Suspend\SuspendValidator;
@@ -32,13 +34,19 @@ class SaveSuspensionToDatabase
     protected $events;
 
     /**
+     * @var Formatter
+     */
+    protected $formatter;
+
+    /**
      * @param SuspendValidator $validator
      * @param Dispatcher $events
      */
-    public function __construct(SuspendValidator $validator, Dispatcher $events)
+    public function __construct(SuspendValidator $validator, Dispatcher $events, Formatter $formatter)
     {
         $this->validator = $validator;
         $this->events = $events;
+        $this->formatter = $formatter;
     }
 
     public function handle(Saving $event)
@@ -57,8 +65,10 @@ class SaveSuspensionToDatabase
 
             if ($attributes['suspendedUntil']) {
                 $user->suspended_until = new DateTime($attributes['suspendedUntil']);
-                $user->suspend_reason = empty($attributes['suspendReason']) ? null : $attributes['suspendReason'];
-                $user->suspend_message = empty($attributes['suspendMessage']) ? null : $attributes['suspendMessage'];
+                $user->suspend_reason = empty($attributes['suspendReason']) ?
+                    $this->formatter->parse('', new Post()) : $this->formatter->parse($attributes['suspendReason']);
+                $user->suspend_message = empty($attributes['suspendMessage']) ?
+                    $this->formatter->parse('', new Post()) : $this->formatter->parse($attributes['suspendMessage']);
             } else {
                 $user->suspend_reason = null;
                 $user->suspend_message = null;

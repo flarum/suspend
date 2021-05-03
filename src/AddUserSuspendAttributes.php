@@ -10,10 +10,21 @@
 namespace Flarum\Suspend;
 
 use Flarum\Api\Serializer\UserSerializer;
+use Flarum\Formatter\Formatter;
 use Flarum\User\User;
 
 class AddUserSuspendAttributes
 {
+    /**
+     * @var Formatter
+     */
+    protected $formatter;
+
+    public function __construct(Formatter $formatter)
+    {
+        $this->formatter = $formatter;
+    }
+
     public function __invoke(UserSerializer $serializer, User $user)
     {
         $attributes = [];
@@ -23,7 +34,9 @@ class AddUserSuspendAttributes
         if ($canSuspend) {
             $attributes['suspendedUntil'] = $serializer->formatDate($user->suspended_until);
             $attributes['suspendMessage'] = $user->suspend_message;
+            $attributes['suspendMessageRaw'] = $this->formatter->unparse($user->suspend_message);
             $attributes['suspendReason'] = $user->suspend_reason;
+            $attributes['suspendReasonRaw'] = $this->formatter->unparse($user->suspend_reason);
         }
 
         if ($isCurrentUser || $canSuspend) {
