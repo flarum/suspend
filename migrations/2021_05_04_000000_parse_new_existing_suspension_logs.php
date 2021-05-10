@@ -12,6 +12,7 @@ return [
             ->query()
             ->select()
             ->from('users_suspension_history')
+            ->orderBy('id')
             ->chunk(100, function ($suspensionLogs) use ($formatter, $schema) {
                 foreach ($suspensionLogs as $suspensionLog) {
                     $update = [];
