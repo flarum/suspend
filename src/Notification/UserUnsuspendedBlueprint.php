@@ -20,18 +20,11 @@ class UserUnsuspendedBlueprint implements BlueprintInterface
     public $user;
 
     /**
-     * @var User
-     */
-    public $actor;
-
-    /**
      * @param User $user
-     * @param User $actor
      */
-    public function __construct(User $user, User $actor)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->actor = $actor;
     }
 
     /**
@@ -47,7 +40,6 @@ class UserUnsuspendedBlueprint implements BlueprintInterface
      */
     public function getFromUser()
     {
-        return $this->actor;
     }
 
     /**
