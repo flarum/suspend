@@ -40,6 +40,7 @@ class UserSuspendedBlueprint implements BlueprintInterface
      */
     public function getFromUser()
     {
+        return null;
     }
 
     /**

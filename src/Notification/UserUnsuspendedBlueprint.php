@@ -40,6 +40,7 @@ class UserUnsuspendedBlueprint implements BlueprintInterface
      */
     public function getFromUser()
     {
+        return null;
     }
 
     /**
@@ -47,6 +48,7 @@ class UserUnsuspendedBlueprint implements BlueprintInterface
      */
     public function getData()
     {
+        return null;
     }
 
     /**
