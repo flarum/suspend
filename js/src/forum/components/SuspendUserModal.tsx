@@ -11,8 +11,8 @@ import { calculateDaysRemaining } from '../helpers/calculateDaysRemaining';
 
 export default class SuspendUserModal extends Modal {
   // Workaround for missing Stream typings
-  status: ((e?: string) => string) | undefined;
-  daysRemaining: ((e?: number) => number) | undefined;
+  status!: (e?: string) => string;
+  daysRemaining!: (e?: number) => number;
 
   oninit(vnode: Vnode) {
     super.oninit(vnode);
@@ -68,7 +68,7 @@ export default class SuspendUserModal extends Modal {
                   name="status"
                   checked={this.status!() === 'limited'}
                   value="limited"
-                  onclick={(e: Event) => {
+                  onclick={(e: Event & { redraw: boolean }) => {
                     this.status!((e.currentTarget as HTMLInputElement).value);
                     m.redraw.sync();
                     this.$('.SuspendUserModal-days-input input').trigger('select');
