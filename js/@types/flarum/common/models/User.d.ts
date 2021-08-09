@@ -1,4 +1,4 @@
-import _User from '@flarum/common/models/User';
+import _User from '../../../../../vendor/flarum/core/js/dist-typings/common/models/User';
 
 /**
  * @inheritdoc
