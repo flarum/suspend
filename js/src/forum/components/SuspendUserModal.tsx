@@ -1,11 +1,20 @@
-import Modal from 'flarum/components/Modal';
-import Button from 'flarum/components/Button';
+import app from 'flarum/forum/app';
+import type { Vnode } from 'mithril';
 
-import Stream from 'flarum/utils/Stream';
-import withAttr from 'flarum/utils/withAttr';
+import Modal from 'flarum/common/components/Modal';
+import Button from 'flarum/common/components/Button';
+
+import Stream from 'flarum/common/utils/Stream';
+import withAttr from 'flarum/common/utils/withAttr';
+
+import { calculateDaysRemaining } from '../helpers/calculateDaysRemaining';
 
 export default class SuspendUserModal extends Modal {
-  oninit(vnode) {
+  // Workaround for missing Stream typings
+  status!: (e?: string) => string;
+  daysRemaining!: (e?: number) => number;
+
+  oninit(vnode: Vnode) {
     super.oninit(vnode);
 
     let until = this.attrs.user.suspendedUntil();
@@ -19,7 +28,7 @@ export default class SuspendUserModal extends Modal {
     }
 
     this.status = Stream(status);
-    this.daysRemaining = Stream(status === 'limited' && -dayjs().diff(until, 'days') + 1);
+    this.daysRemaining = Stream(status === 'limited' && calculateDaysRemaining(until));
   }
 
   className() {
@@ -59,10 +68,10 @@ export default class SuspendUserModal extends Modal {
                   name="status"
                   checked={this.status() === 'limited'}
                   value="limited"
-                  onclick={(e) => {
-                    this.status(e.target.value);
+                  onclick={(e: Event & { redraw: boolean }) => {
+                    this.status((e.currentTarget as HTMLInputElement).value);
                     m.redraw.sync();
-                    this.$('.SuspendUserModal-days-input input').select();
+                    this.$('.SuspendUserModal-days-input input').trigger('select');
                     e.redraw = false;
                   }}
                 />
@@ -95,7 +104,7 @@ export default class SuspendUserModal extends Modal {
     );
   }
 
-  onsubmit(e) {
+  onsubmit(e: Event) {
     e.preventDefault();
 
     this.loading = true;

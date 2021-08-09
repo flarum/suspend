@@ -1,4 +1,5 @@
-import Notification from 'flarum/components/Notification';
+import app from 'flarum/forum/app';
+import Notification from 'flarum/forum/components/Notification';
 
 export default class UserUnsuspendedNotification extends Notification {
   icon() {
@@ -10,8 +11,6 @@ export default class UserUnsuspendedNotification extends Notification {
   }
 
   content() {
-    const notification = this.attrs.notification;
-
     return app.translator.trans('flarum-suspend.forum.notifications.user_unsuspended_text');
   }
 }
