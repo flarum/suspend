@@ -69,7 +69,7 @@ class UserSuspendedBlueprint implements BlueprintInterface, MailableInterface
         return User::class;
     }
 
-        /**
+    /**
      * {@inheritdoc}
      */
     public function getEmailView()
