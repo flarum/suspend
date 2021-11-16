@@ -3,7 +3,7 @@ import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import fullTime from 'flarum/common/helpers/fullTime';
 
-export default class ResultsModal extends Modal {
+export default class SuspensionInfoModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
 
@@ -12,7 +12,7 @@ export default class ResultsModal extends Modal {
   }
 
   className() {
-    return 'SuspendInfoModal Modal';
+    return 'SuspensionInfoModal Modal';
   }
 
   title() {
