@@ -2,6 +2,7 @@ import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import fullTime from 'flarum/common/helpers/fullTime';
+import { isPermanentSuspensionDate } from '../helpers/suspensionHelper';
 
 export default class SuspensionInfoModal extends Modal {
   oninit(vnode) {
@@ -21,7 +22,7 @@ export default class SuspensionInfoModal extends Modal {
 
   content() {
     const timespan =
-      this.until.getFullYear() === 2038
+      isPermanentSuspensionDate(new Date(this.until))
         ? app.translator.trans('flarum-suspend.forum.suspension-info.indefinite')
         : app.translator.trans('flarum-suspend.forum.suspension-info.limited', { date: fullTime(this.until) });
 

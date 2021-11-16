@@ -5,6 +5,7 @@ import Button from 'flarum/components/Button';
 import Stream from 'flarum/utils/Stream';
 import withAttr from 'flarum/utils/withAttr';
 import ItemList from 'flarum/common/utils/ItemList';
+import { getPermanentSuspensionDate } from '../helpers/suspensionHelper';
 
 export default class SuspendUserModal extends Modal {
   oninit(vnode) {
@@ -131,7 +132,7 @@ export default class SuspendUserModal extends Modal {
     let suspendedUntil = null;
     switch (this.status()) {
       case 'indefinitely':
-        suspendedUntil = new Date('2038-01-01');
+        suspendedUntil = getPermanentSuspensionDate();
         break;
 
       case 'limited':
