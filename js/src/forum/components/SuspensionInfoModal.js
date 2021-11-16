@@ -16,14 +16,14 @@ export default class SuspensionInfoModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('flarum-suspend.forum.infomodal.title');
+    return app.translator.trans('flarum-suspend.forum.suspension-info.title');
   }
 
   content() {
     const timespan =
       this.until.getFullYear() === 2038
-        ? app.translator.trans('flarum-suspend.forum.infomodal.indefinite')
-        : app.translator.trans('flarum-suspend.forum.infomodal.limited', { date: fullTime(this.until) });
+        ? app.translator.trans('flarum-suspend.forum.suspension-info.indefinite')
+        : app.translator.trans('flarum-suspend.forum.suspension-info.limited', { date: fullTime(this.until) });
 
     return (
       <div className="Modal-body">
@@ -33,7 +33,7 @@ export default class SuspensionInfoModal extends Modal {
 
           <div className="Form-group">
             <Button className="Button Button--primary Button--block" onclick={this.hide.bind(this)}>
-              {app.translator.trans('flarum-suspend.forum.infomodal.dismiss_button')}
+              {app.translator.trans('flarum-suspend.forum.suspension-info.dismiss_button')}
             </Button>
           </div>
         </div>

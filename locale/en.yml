@@ -13,16 +13,17 @@ flarum-suspend:
 
   # Translations in this namespace are used by the forum user interface.
   forum:
-    infomodal:
-      dismiss_button: Dismiss
-      indefinite: This is an indefinite suspension
-      limited: "This suspension will be in force until {date}"
-      title: This account is suspended
-
     # These translations are used in the suspension notifications
     notifications:
       user_suspended_text: "You have been suspended for {timeReadable}"
       user_unsuspended_text: You have been unsuspended
+
+    # These translations are used for the suspension reason informational modal to the suspended user.
+    suspension-info:
+      dismiss_button: Dismiss
+      indefinite: This is an indefinite suspension
+      limited: "This suspension will be in force until {date}"
+      title: This account is suspended
 
     # These translations are used in the Suspend User modal dialog (admin function).
     suspend_user:
