@@ -63,5 +63,5 @@ return [
         ->addGambit(SuspendedFilterGambit::class),
 
     (new Extend\View())
-        ->namespace('flarum-suspend', __DIR__.'views'),
+        ->namespace('flarum-suspend', __DIR__.'/views'),
 ];
