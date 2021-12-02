@@ -19,7 +19,7 @@ flarum-suspend:
       user_unsuspended_text: You have been unsuspended
 
     # These translations are used for the suspension reason informational modal to the suspended user.
-    suspension-info:
+    suspension_info:
       dismiss_button: Dismiss
       indefinite: This is an indefinite suspension
       limited: "This suspension will be in force until {date}"
