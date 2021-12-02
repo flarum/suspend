@@ -8,5 +8,5 @@ export function getPermanentSuspensionDate(): Date {
 }
 
 export function isPermanentSuspensionDate(date: Date): boolean {
-  return dayjs.utc(date).isSame('2038-01-01');
+  return dayjs.utc(date).isSame(dayjs.utc('2038-01-01'));
 }
