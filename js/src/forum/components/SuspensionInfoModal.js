@@ -21,10 +21,9 @@ export default class SuspensionInfoModal extends Modal {
   }
 
   content() {
-    const timespan =
-      isPermanentSuspensionDate(new Date(this.until))
-        ? app.translator.trans('flarum-suspend.forum.suspension_info.indefinite')
-        : app.translator.trans('flarum-suspend.forum.suspension_info.limited', { date: fullTime(this.until) });
+    const timespan = isPermanentSuspensionDate(new Date(this.until))
+      ? app.translator.trans('flarum-suspend.forum.suspension_info.indefinite')
+      : app.translator.trans('flarum-suspend.forum.suspension_info.limited', { date: fullTime(this.until) });
 
     return (
       <div className="Modal-body">

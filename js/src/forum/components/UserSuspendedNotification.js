@@ -19,7 +19,7 @@ export default class UserSuspendedNotification extends Notification {
     return isPermanentSuspensionDate(suspendedUntil)
       ? app.translator.trans('flarum-suspend.forum.notifications.user_suspended_indefinite_text')
       : app.translator.trans('flarum-suspend.forum.notifications.user_suspended_text', {
-      timeReadable,
-    });
+          timeReadable,
+        });
   }
 }

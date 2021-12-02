@@ -107,7 +107,12 @@ export default class SuspendUserModal extends Modal {
       'reason',
       <label>
         {app.translator.trans('flarum-suspend.forum.suspend_user.reason')}
-        <textarea className="FormControl" bidi={this.reason} placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')} rows="2" />
+        <textarea
+          className="FormControl"
+          bidi={this.reason}
+          placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')}
+          rows="2"
+        />
       </label>,
       70
     );
@@ -116,7 +121,12 @@ export default class SuspendUserModal extends Modal {
       'message',
       <label>
         {app.translator.trans('flarum-suspend.forum.suspend_user.display_message')}
-        <textarea className="FormControl" bidi={this.message} placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')} rows="2" />
+        <textarea
+          className="FormControl"
+          bidi={this.message}
+          placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')}
+          rows="2"
+        />
       </label>,
       60
     );
