@@ -43,6 +43,9 @@ export default class SuspendUserModal extends Modal {
         <div className="Form">
           <div className="Form-group">
             <label>{app.translator.trans('flarum-suspend.forum.suspend_user.status_heading')}</label>
+            <div>{this.radioItems().toArray()}</div>
+          </div>
+          <div className='Form-group'>
             <div>{this.formItems().toArray()}</div>
           </div>
 
@@ -56,7 +59,7 @@ export default class SuspendUserModal extends Modal {
     );
   }
 
-  formItems() {
+  radioItems() {
     const items = new ItemList();
 
     items.add(
@@ -103,6 +106,12 @@ export default class SuspendUserModal extends Modal {
       80
     );
 
+    return items;
+  }
+
+  formItems() {
+    const items = new ItemList();
+
     items.add(
       'reason',
       <label>
@@ -114,7 +123,7 @@ export default class SuspendUserModal extends Modal {
           rows="2"
         />
       </label>,
-      70
+      90
     );
 
     items.add(
@@ -128,7 +137,7 @@ export default class SuspendUserModal extends Modal {
           rows="2"
         />
       </label>,
-      60
+      80
     );
 
     return items;
