@@ -42,7 +42,7 @@ export default class SuspensionInfoModal extends Modal {
   }
 
   hide() {
-    localStorage.setItem(localStorageKey(), this.attrs.until);
+    localStorage.setItem(localStorageKey(), this.attrs.until.getTime());
     this.attrs.state.close();
   }
 }
