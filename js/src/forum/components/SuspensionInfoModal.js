@@ -2,7 +2,7 @@ import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import fullTime from 'flarum/common/helpers/fullTime';
-import { isPermanentSuspensionDate } from '../helpers/suspensionHelper';
+import { isPermanentSuspensionDate, localStorageKey } from '../helpers/suspensionHelper';
 
 export default class SuspensionInfoModal extends Modal {
   oninit(vnode) {
@@ -39,5 +39,10 @@ export default class SuspensionInfoModal extends Modal {
         </div>
       </div>
     );
+  }
+
+  hide() {
+    localStorage.setItem(localStorageKey(), this.attrs.until);
+    this.attrs.state.close();
   }
 }

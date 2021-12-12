@@ -1,16 +1,19 @@
 import app from 'flarum/forum/app';
 import SuspensionInfoModal from './components/SuspensionInfoModal';
+import { localStorageKey } from './helpers/suspensionHelper';
 
 export default function () {
-  return new Promise(() => {
-    setTimeout(() => {
-      if (app.session.user) {
-        const message = app.session.user.suspendMessage();
-        const until = app.session.user.suspendedUntil();
-        if (message) {
-          app.modal.show(SuspensionInfoModal, { message, until });
-        }
+  return setTimeout(() => {
+    if (app.session.user) {
+      const message = app.session.user.suspendMessage();
+      const until = app.session.user.suspendedUntil();
+      const alreadyDisplayed = localStorage.getItem(localStorageKey()) === until;
+
+      if (message && !alreadyDisplayed) {
+        app.modal.show(SuspensionInfoModal, { message, until });
+      } else if (!until && localStorage.getItem(localStorageKey())) {
+        localStorage.removeItem(localStorageKey());
       }
-    }, 1000);
-  });
+    }
+  }, 0);
 }

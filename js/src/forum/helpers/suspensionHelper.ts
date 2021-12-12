@@ -10,3 +10,7 @@ export function getPermanentSuspensionDate(): Date {
 export function isPermanentSuspensionDate(date: Date): boolean {
   return dayjs.utc(date).isSame(dayjs.utc('2038-01-01'));
 }
+
+export function localStorageKey(): string {
+  return 'flarum-suspend.acknowledge-suspension';
+}
