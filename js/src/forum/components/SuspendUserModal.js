@@ -45,7 +45,7 @@ export default class SuspendUserModal extends Modal {
             <label>{app.translator.trans('flarum-suspend.forum.suspend_user.status_heading')}</label>
             <div>{this.radioItems().toArray()}</div>
           </div>
-          <div className='Form-group'>
+          <div className="Form-group">
             <div>{this.formItems().toArray()}</div>
           </div>
 
