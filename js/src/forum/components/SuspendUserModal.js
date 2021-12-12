@@ -43,9 +43,6 @@ export default class SuspendUserModal extends Modal {
         <div className="Form">
           <div className="Form-group">
             <label>{app.translator.trans('flarum-suspend.forum.suspend_user.status_heading')}</label>
-            <div>{this.radioItems().toArray()}</div>
-          </div>
-          <div className="Form-group">
             <div>{this.formItems().toArray()}</div>
           </div>
 
@@ -113,8 +110,17 @@ export default class SuspendUserModal extends Modal {
     const items = new ItemList();
 
     items.add(
+      'radioItems',
+      <div className='Form-group'>
+        {this.radioItems().toArray()}
+      </div>,
+      100
+    );
+
+    items.add(
       'reason',
-      <label>
+      <div className='Form-group'>
+        <label>
         {app.translator.trans('flarum-suspend.forum.suspend_user.reason')}
         <textarea
           className="FormControl"
@@ -122,13 +128,15 @@ export default class SuspendUserModal extends Modal {
           placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')}
           rows="2"
         />
-      </label>,
+      </label>
+      </div>,
       90
     );
 
     items.add(
       'message',
-      <label>
+      <div className='Form-group'>
+        <label>
         {app.translator.trans('flarum-suspend.forum.suspend_user.display_message')}
         <textarea
           className="FormControl"
@@ -136,7 +144,8 @@ export default class SuspendUserModal extends Modal {
           placeholder={app.translator.trans('flarum-suspend.forum.suspend_user.placeholder_optional')}
           rows="2"
         />
-      </label>,
+      </label>
+      </div>,
       80
     );
 
