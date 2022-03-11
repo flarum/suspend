@@ -43,7 +43,7 @@ class SuspendedFilterGambit extends AbstractRegexGambit implements FilterInterfa
      */
     public function apply(SearchState $search, $bit)
     {
-        if (! $search->getActor()->can('suspend', new Guest())) {
+        if (!$search->getActor()->can('suspend', new Guest())) {
             return false;
         }
 
@@ -65,7 +65,7 @@ class SuspendedFilterGambit extends AbstractRegexGambit implements FilterInterfa
 
     public function filter(FilterState $filterState, string $filterValue, bool $negate)
     {
-        if (! $filterState->getActor()->can('suspend', new Guest())) {
+        if (!$filterState->getActor()->can('suspend', new Guest())) {
             return false;
         }
 
